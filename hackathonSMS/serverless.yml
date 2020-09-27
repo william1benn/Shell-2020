@@ -1,0 +1,34 @@
+
+
+service: hackathonsms
+frameworkVersion: '2'
+
+
+provider:
+  name: aws
+  runtime: dotnetcore3.1
+  region: us-east-1
+  stage: ${opt:stage, 'v2'}
+  endpointType: REGIONAL
+  timeout: 30
+
+package:
+  individually: true
+
+functions:
+  SMSProcessing:
+    handler: CsharpHandlers::Hackathon.ProcessingHandler::SMSProcessing
+    memorySize: 500
+    package:
+      artifact: bin/Release/netcoreapp3.1/hackathonFunctions.zip
+
+  RegisterUser:
+    handler: CsharpHandlers::Hackathon.RegisterHandler::RegisterUser
+    memorySize: 500
+    package:
+      artifact: bin/Release/netcoreapp3.1/hackathonFunctions.zip
+    events:
+      - http:
+          path: /Registeruser
+          method: POST
+          cors: true

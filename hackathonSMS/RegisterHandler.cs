@@ -22,7 +22,7 @@ namespace Hackathon
                 await insertData(userInfo.name,userInfo.phone,userInfo.address);
                 return new APIGatewayProxyResponse
                     {
-                        StatusCode = 500,
+                        StatusCode = 200,
                         Body = "Thank you for registering",
                         Headers = new Dictionary<string, string>
                 { 

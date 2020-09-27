@@ -11,7 +11,7 @@ provider:
   stage: ${opt:stage, 'v2'}
   endpointType: REGIONAL
   timeout: 30
-
+  
 package:
   individually: true
 
